@@ -15,4 +15,19 @@ export default class getLs{
     static CONNECTED(): boolean {
         return localStorage.getItem('CONNECTED') === 'true'
     }
+    static WORKING_SCENE(): string {
+        return localStorage.getItem('WORKING_SCENE') || ''
+    }
+    static PAUSE_SCENE(): string {
+        return localStorage.getItem('PAUSE_SCENE') || ''
+    }
+    static PAUSE_MICROPHONE(): boolean {
+        return localStorage.getItem('PAUSE_MICROPHONE') === 'true'
+    }
+    static WORKING_MICROPHONE(): boolean {
+        return localStorage.getItem('WORKING_MICROPHONE') === 'true'
+    }
+    static INPUT_SELECTED(): string {
+        return localStorage.getItem('INPUT_SELECTED') || ''
+    }
 }

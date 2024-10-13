@@ -1,6 +1,6 @@
 import OBSWebSocket from "obs-websocket-js";
 import {useEffect, useState} from "react";
-import {getObs, getSceneList} from "../utils/obs.ts";
+import {getInputList, getObs, getSceneList} from "../utils/obs.ts";
 import setLs from "../utils/setLocalStorage.ts";
 import AddConfiguration from "./Config/addConfiguration.tsx";
 import getLs from "../utils/getLocalStorage.ts";
@@ -14,6 +14,7 @@ export default function Config() {
   const [counter, setCounter] = useState(workingTime);
   const [refresh, setRefresh] = useState(false);
   const [sceneList, setSceneList] = useState<string[]>();
+  const [inputList, setInputList] = useState<string[]>();
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -33,13 +34,13 @@ export default function Config() {
           if (workScene) {
             setCounter(pauseTime)
             setWorkScene(false)
-            changeScene("pause")
-            changeMicrophoneState(false)
+            changeScene(getLs.PAUSE_SCENE())
+            changeMicrophoneState(getLs.PAUSE_MICROPHONE())
           } else {
             setCounter(workingTime)
             setWorkScene(true)
-            changeScene("work")
-            changeMicrophoneState(true)
+            changeScene(getLs.WORKING_SCENE())
+            changeMicrophoneState(getLs.WORKING_MICROPHONE())
           }
         }
       };
@@ -57,7 +58,8 @@ export default function Config() {
   }
 
   function changeMicrophoneState(state: boolean) {
-    obs.call("SetInputMute", {"inputName": "Mic/Aux", "inputMuted": state})
+    const input = getLs.INPUT_SELECTED()
+    obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
   }
 
   return (
@@ -78,12 +80,15 @@ export default function Config() {
                 getSceneList(obs).then((sceneList) => {
                   setSceneList(sceneList.scenes.map(scene => scene.sceneName))
                 })
-                console.log(sceneList)
+
+                getInputList(obs).then((inputList) => {
+                  setInputList(inputList.inputs.map(input => input.inputName))
+                })
               }}>
                 Refresh
               </button>
             </div>
-            <AddConfiguration sceneList={sceneList} setSceneList={setSceneList} connected={connected}/>
+            <AddConfiguration sceneList={sceneList} inputList={inputList}/>
           </>
         ) :
         (

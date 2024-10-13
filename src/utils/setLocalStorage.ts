@@ -14,4 +14,19 @@ export default class setLs{
     static CONNECTED(value:boolean) {
        localStorage.setItem('CONNECTED', value.toString())
     }
+    static WORKING_SCENE(value:string) {
+       localStorage.setItem('WORKING_SCENE', value)
+    }
+    static PAUSE_SCENE(value:string) {
+       localStorage.setItem('PAUSE_SCENE', value)
+    }
+    static PAUSE_MICROPHONE(value:boolean) {
+       localStorage.setItem('PAUSE_MICROPHONE', value.toString())
+    }
+    static WORKING_MICROPHONE(value:boolean) {
+       localStorage.setItem('WORKING_MICROPHONE', value.toString())
+    }
+    static INPUT_SELECTED(value:string) {
+       localStorage.setItem('INPUT_SELECTED', value)
+    }
 }
