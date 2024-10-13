@@ -4,13 +4,14 @@ import {getInputList, getObs, getSceneList} from "../utils/obs.ts";
 import setLs from "../utils/setLocalStorage.ts";
 import AddConfiguration from "./Config/addConfiguration.tsx";
 import getLs from "../utils/getLocalStorage.ts";
+import {showTime, toMinutes} from "../utils/utils.ts";
 
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
   const [obs, setObs] = useState<OBSWebSocket>(new OBSWebSocket());
   const [workScene, setWorkScene] = useState(true);
-  const workingTime = getLs.WORKING_TIME();
-  const pauseTime = getLs.PAUSE_TIME();
+  const workingTime = toMinutes(getLs.WORKING_TIME());
+  const pauseTime = toMinutes(getLs.PAUSE_TIME());
   const [counter, setCounter] = useState(workingTime);
   const [refresh, setRefresh] = useState(false);
   const [sceneList, setSceneList] = useState<string[]>();
@@ -87,6 +88,11 @@ export default function Config() {
               }}>
                 Refresh
               </button>
+            </div>
+            <div className={"countDown"}>
+              <p>Countdown: {showTime(counter)}</p>
+              <button onClick={()=>setCounter(counter + toMinutes(1))}><p>+1</p></button>
+              <button onClick={()=>setCounter(counter + toMinutes(5))}><p>+5</p></button>
             </div>
             <AddConfiguration sceneList={sceneList} inputList={inputList}/>
           </>
