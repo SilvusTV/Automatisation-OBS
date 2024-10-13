@@ -4,9 +4,11 @@ import {getInputList, getObs, getSceneList} from "../utils/obs.ts";
 import setLs from "../utils/setLocalStorage.ts";
 import AddConfiguration from "./Config/addConfiguration.tsx";
 import getLs from "../utils/getLocalStorage.ts";
-import {showTime, toMinutes} from "../utils/utils.ts";
+import {showTime, showTimeWithoutSeconds, toMinutes} from "../utils/utils.ts";
 import {Play} from "../assets/Play.tsx";
 import {Pause} from "../assets/Pause.tsx";
+import {VisibilityOff} from "../assets/VisibilityOff.tsx";
+import {Visibility} from "../assets/Visibility.tsx";
 
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
@@ -20,6 +22,7 @@ export default function Config() {
   const [inputList, setInputList] = useState<string[]>();
   const [totalTime, setTotalTime] = useState(getLs.TOTAL_TIME());
   const [timePaused, setTimePaused] = useState(false);
+  const [showSeconds, setShowSeconds] = useState(false);
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -108,7 +111,10 @@ export default function Config() {
               <button onClick={() => setCounter(counter + toMinutes(5))}><p>+5</p></button>
             </div>
             <div>
-              <p>Total time: {showTime(totalTime)}</p>
+              <button onClick={()=>setShowSeconds(!showSeconds)}>
+                <p>Total time: {showSeconds? showTime(totalTime) : showTimeWithoutSeconds(totalTime) }</p>
+                {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
+              </button>
             </div>
             <AddConfiguration sceneList={sceneList} inputList={inputList}/>
           </>
