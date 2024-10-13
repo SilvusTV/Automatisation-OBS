@@ -106,7 +106,9 @@ export default function Config() {
             <div className={"countDown"}>
               <span>
                 <p>Countdown: {showTime(counter)}</p>
-                <button onClick={()=>{setTimePaused(!timePaused)}}>
+                <button onClick={() => {
+                  setTimePaused(!timePaused)
+                }}>
                   {timePaused ? <Play className={"icon"}/> : <Pause className={"icon"}/>}
                 </button>
               </span>
@@ -114,8 +116,8 @@ export default function Config() {
               <button onClick={() => setCounter(counter + toMinutes(5))}><p>+5</p></button>
             </div>
             <div>
-              <button onClick={()=>setShowSeconds(!showSeconds)}>
-                <p>Total time: {showSeconds? showTime(totalTime) : showTimeWithoutSeconds(totalTime) }</p>
+              <button onClick={() => setShowSeconds(!showSeconds)}>
+                <p>Total time: {showSeconds ? showTime(totalTime) : showTimeWithoutSeconds(totalTime)}</p>
                 {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
               </button>
             </div>
@@ -131,17 +133,19 @@ export default function Config() {
                 connect()
               }}
             >
-              Connecter
+              <p>Connecter</p>
             </button>
             <button
               className={"DownloadButton"}
-              onClick={()=>saveData()}
+              onClick={() => {saveData()}}
             >
-              <p>Sauvegarder les données <Download className={"icon"}/></p>
+              <p className={"text-w-icon"}>Exporter les données <Upload className={"icon"}/></p>
             </button>
             <div className={"ImportBloc"}>
-              <label htmlFor={"importData"}>Importer les donnée <Upload className={"icon"}/></label>
-              <input type="file" onChange={loadData} name={"importData"}/>
+              <label htmlFor={"importData"}>
+                <span className={"text-w-icon import"}>Importer les données <Download className={"icon"}/></span>
+                <input type="file" onChange={loadData} id={"importData"}/>
+              </label>
             </div>
           </section>
         )

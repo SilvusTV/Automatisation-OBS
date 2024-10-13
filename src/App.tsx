@@ -1,4 +1,3 @@
-import './App.css'
 import {Route, Routes} from "react-router-dom";
 import Config from "./Page/Config.tsx";
 import Screen from "./Page/Scren.tsx";
