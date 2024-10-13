@@ -17,9 +17,9 @@ export default function AddConfiguration(props: {
       <h1>Config</h1>
       <div>
         <label htmlFor={"micInput"}>Microphone Input</label>
-        <select name={"micInput"} onChange={event => setLs.INPUT_SELECTED(event.currentTarget.value)}>
+        <select name={"micInput"} onChange={event => setLs.MICROPHONE_SELECTED(event.currentTarget.value)}>
           {props.inputList?.map((input, index) => (
-            <option key={index} selected={input === getLs.INPUT_SELECTED()}>{input}</option>
+            <option key={index} selected={input === getLs.MICROPHONE_SELECTED()}>{input}</option>
           ))}
         </select>
       </div>

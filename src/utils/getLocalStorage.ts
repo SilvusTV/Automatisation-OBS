@@ -27,8 +27,8 @@ export default class getLs{
     static WORKING_MICROPHONE(): boolean {
         return localStorage.getItem('WORKING_MICROPHONE') === 'true'
     }
-    static INPUT_SELECTED(): string {
-        return localStorage.getItem('INPUT_SELECTED') || ''
+    static MICROPHONE_SELECTED(): string {
+        return localStorage.getItem('MICROPHONE_SELECTED') || ''
     }
     static TOTAL_TIME(): number {
         return parseInt(localStorage.getItem('TOTAL_TIME') || '0')

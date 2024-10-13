@@ -9,6 +9,9 @@ import {Play} from "../assets/Play.tsx";
 import {Pause} from "../assets/Pause.tsx";
 import {VisibilityOff} from "../assets/VisibilityOff.tsx";
 import {Visibility} from "../assets/Visibility.tsx";
+import {Download} from "../assets/Download.tsx";
+import {loadData, saveData} from "../utils/ImportExport.ts";
+import {Upload} from "../assets/Upload.tsx";
 
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
@@ -70,7 +73,7 @@ export default function Config() {
   }
 
   function changeMicrophoneState(state: boolean) {
-    const input = getLs.INPUT_SELECTED()
+    const input = getLs.MICROPHONE_SELECTED()
     obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
   }
 
@@ -120,14 +123,27 @@ export default function Config() {
           </>
         ) :
         (
-          <button
-            onClick={() => {
-              console.log('connect')
-              connect()
-            }}
-          >
-            Connecter
-          </button>
+          <section className={"ConnectPage"}>
+            <button
+              className={"ConnectButton"}
+              onClick={() => {
+                console.log('connect')
+                connect()
+              }}
+            >
+              Connecter
+            </button>
+            <button
+              className={"DownloadButton"}
+              onClick={()=>saveData()}
+            >
+              <p>Sauvegarder les données <Download className={"icon"}/></p>
+            </button>
+            <div className={"ImportBloc"}>
+              <label htmlFor={"importData"}>Importer les donnée <Upload className={"icon"}/></label>
+              <input type="file" onChange={loadData} name={"importData"}/>
+            </div>
+          </section>
         )
       }
     </>
