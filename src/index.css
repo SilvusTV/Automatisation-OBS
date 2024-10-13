@@ -54,9 +54,24 @@ input[type=file] {
     gap: 5px;
     justify-content: center;
 }
-
-
-
+.devBlock{
+    cursor: text;
+    position: relative;
+    text-align: start;
+    background: var(--input-hover);
+    font-family: Consolas, monospace;
+}
+.devBlock > button{
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 5px 7px;
+    cursor: pointer;
+}
 
 section.ConnectPage {
     padding: 5px 7px;

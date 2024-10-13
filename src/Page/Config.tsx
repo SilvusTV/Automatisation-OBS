@@ -12,6 +12,7 @@ import {Visibility} from "../assets/Visibility.tsx";
 import {Download} from "../assets/Download.tsx";
 import {loadData, saveData} from "../utils/ImportExport.ts";
 import {Upload} from "../assets/Upload.tsx";
+import {ShowLocalStorage} from "./ShowLocalStorage.tsx";
 
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
@@ -26,6 +27,7 @@ export default function Config() {
   const [totalTime, setTotalTime] = useState(getLs.TOTAL_TIME());
   const [timePaused, setTimePaused] = useState(false);
   const [showSeconds, setShowSeconds] = useState(false);
+  const [showLocalStorages, setShowLocalStorages] = useState(false);
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -76,7 +78,6 @@ export default function Config() {
     const input = getLs.MICROPHONE_SELECTED()
     obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
   }
-
   return (
     <>
       {connected ? (
@@ -137,9 +138,15 @@ export default function Config() {
             </button>
             <button
               className={"DownloadButton"}
-              onClick={() => {saveData()}}
+              onClick={() => {
+                saveData()
+                setShowLocalStorages(true)
+              }}
             >
               <p className={"text-w-icon"}>Exporter les données <Upload className={"icon"}/></p>
+              {showLocalStorages && (
+                <ShowLocalStorage/>
+              )}
             </button>
             <div className={"ImportBloc"}>
               <label htmlFor={"importData"}>
