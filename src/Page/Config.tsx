@@ -5,6 +5,8 @@ import setLs from "../utils/setLocalStorage.ts";
 import AddConfiguration from "./Config/addConfiguration.tsx";
 import getLs from "../utils/getLocalStorage.ts";
 import {showTime, toMinutes} from "../utils/utils.ts";
+import {Play} from "../assets/Play.tsx";
+import {Pause} from "../assets/Pause.tsx";
 
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
@@ -17,6 +19,7 @@ export default function Config() {
   const [sceneList, setSceneList] = useState<string[]>();
   const [inputList, setInputList] = useState<string[]>();
   const [totalTime, setTotalTime] = useState(getLs.TOTAL_TIME());
+  const [timePaused, setTimePaused] = useState(false);
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -28,28 +31,30 @@ export default function Config() {
   useEffect(() => {
     setRefresh(false)
     if (connected) {
-      setTotalTime(totalTime + 1)
-      setLs.TOTAL_TIME(totalTime + 1)
-      setLs.COUNTER(counter)
-      const timer = counter >= 0 && setInterval(() => setCounter(counter - 1), 1000);
-      return () => {
-        clearInterval(timer as number)
-        if (counter === 0) {
-          if (workScene) {
-            setCounter(pauseTime)
-            setWorkScene(false)
-            changeScene(getLs.PAUSE_SCENE())
-            changeMicrophoneState(getLs.PAUSE_MICROPHONE())
-          } else {
-            setCounter(workingTime)
-            setWorkScene(true)
-            changeScene(getLs.WORKING_SCENE())
-            changeMicrophoneState(getLs.WORKING_MICROPHONE())
+      if (!timePaused) {
+        setTotalTime(totalTime + 1)
+        setLs.TOTAL_TIME(totalTime + 1)
+        setLs.COUNTER(counter)
+        const timer = counter >= 0 && setInterval(() => setCounter(counter - 1), 1000);
+        return () => {
+          clearInterval(timer as number)
+          if (counter === 0) {
+            if (workScene) {
+              setCounter(pauseTime)
+              setWorkScene(false)
+              changeScene(getLs.PAUSE_SCENE())
+              changeMicrophoneState(getLs.PAUSE_MICROPHONE())
+            } else {
+              setCounter(workingTime)
+              setWorkScene(true)
+              changeScene(getLs.WORKING_SCENE())
+              changeMicrophoneState(getLs.WORKING_MICROPHONE())
+            }
           }
-        }
-      };
+        };
+      }
     }
-  }, [counter, connected, refresh]);
+  }, [counter, connected, refresh, timePaused]);
 
   async function connect() {
     setObs(await getObs())
@@ -93,9 +98,14 @@ export default function Config() {
               </button>
             </div>
             <div className={"countDown"}>
-              <p>Countdown: {showTime(counter)}</p>
-              <button onClick={()=>setCounter(counter + toMinutes(1))}><p>+1</p></button>
-              <button onClick={()=>setCounter(counter + toMinutes(5))}><p>+5</p></button>
+              <span>
+                <p>Countdown: {showTime(counter)}</p>
+                <button onClick={()=>{setTimePaused(!timePaused)}}>
+                  {timePaused ? <Play className={"icon"}/> : <Pause className={"icon"}/>}
+                </button>
+              </span>
+              <button onClick={() => setCounter(counter + toMinutes(1))}><p>+1</p></button>
+              <button onClick={() => setCounter(counter + toMinutes(5))}><p>+5</p></button>
             </div>
             <div>
               <p>Total time: {showTime(totalTime)}</p>
