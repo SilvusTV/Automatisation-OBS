@@ -29,4 +29,7 @@ export default class setLs{
     static INPUT_SELECTED(value:string) {
        localStorage.setItem('INPUT_SELECTED', value)
     }
+    static TOTAL_TIME(value:number) {
+       localStorage.setItem('TOTAL_TIME', value.toString())
+    }
 }

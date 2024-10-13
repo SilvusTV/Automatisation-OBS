@@ -30,4 +30,7 @@ export default class getLs{
     static INPUT_SELECTED(): string {
         return localStorage.getItem('INPUT_SELECTED') || ''
     }
+    static TOTAL_TIME(): number {
+        return parseInt(localStorage.getItem('TOTAL_TIME') || '0')
+    }
 }

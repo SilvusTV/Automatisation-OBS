@@ -16,6 +16,7 @@ export default function Config() {
   const [refresh, setRefresh] = useState(false);
   const [sceneList, setSceneList] = useState<string[]>();
   const [inputList, setInputList] = useState<string[]>();
+  const [totalTime, setTotalTime] = useState(getLs.TOTAL_TIME());
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -27,10 +28,12 @@ export default function Config() {
   useEffect(() => {
     setRefresh(false)
     if (connected) {
+      setTotalTime(totalTime + 1)
+      setLs.TOTAL_TIME(totalTime + 1)
+      setLs.COUNTER(counter)
       const timer = counter >= 0 && setInterval(() => setCounter(counter - 1), 1000);
       return () => {
         clearInterval(timer as number)
-        setLs.COUNTER(counter)
         if (counter === 0) {
           if (workScene) {
             setCounter(pauseTime)
@@ -93,6 +96,9 @@ export default function Config() {
               <p>Countdown: {showTime(counter)}</p>
               <button onClick={()=>setCounter(counter + toMinutes(1))}><p>+1</p></button>
               <button onClick={()=>setCounter(counter + toMinutes(5))}><p>+5</p></button>
+            </div>
+            <div>
+              <p>Total time: {showTime(totalTime)}</p>
             </div>
             <AddConfiguration sceneList={sceneList} inputList={inputList}/>
           </>
