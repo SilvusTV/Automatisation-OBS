@@ -21,10 +21,12 @@ body {
     color: var(--text-color);
     font-family: 'Roboto', sans-serif;
 }
-p, span{
-    font-size:1rem;
+
+p, span {
+    font-size: 1rem;
 }
-button, input, .import {
+
+button, input, .import, select {
     background: var(--button-bg);
     color: var(--text-color);
     border: 1px solid var(--button-bg);
@@ -33,35 +35,85 @@ button, input, .import {
     padding: 5px 7px;
     cursor: pointer;
 }
+
 button:hover, input:hover, .import:hover {
     background: var(--button-hover);
     border: solid 1px var(--text-color);
 }
-button:focus, input:focus, .import:focus {
+
+button:active, input:active, .import:active, select:active {
     background: var(--input-hover);
     border: solid 1px var(--button-bg);
 }
+select:focus {
+    background: var(--input-hover);
+    border:1px solid var(--select-selected);
+}
+
 input[type=file] {
     display: none;
 }
-.icon{
+
+.icon {
     width: 1rem;
     height: 1rem;
 }
-.text-w-icon{
+
+.text-w-icon {
     display: flex;
     align-items: center;
     gap: 5px;
     justify-content: center;
 }
-.devBlock{
+
+.block {
+    background: var(--bg);
+    padding: 0;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    border: var(--button-bg) solid 1px;
+    border-radius: 5px;
+}
+
+.block > h2 {
+    font-size: 0.8rem;
+    width: 100%;
+    background: var(--button-bg);
+    color: white;
+    padding: 3px 5px;
+}
+
+.child-block {
+    padding: 3px 5px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+section.ConnectPage {
+    padding: 2px;
+    gap: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+section.ConnectPage > * {
+    width: 100%;
+}
+
+.devBlock {
     cursor: text;
     position: relative;
     text-align: start;
     background: var(--input-hover);
     font-family: Consolas, monospace;
 }
-.devBlock > button{
+
+.devBlock > button {
     z-index: 10;
     position: absolute;
     top: 0;
@@ -73,15 +125,68 @@ input[type=file] {
     cursor: pointer;
 }
 
-section.ConnectPage {
+
+section.configPage {
+    background: var(--input-hover);
     padding: 5px 7px;
     gap: 5px;
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
 }
-section.ConnectPage > *{
+
+section.configPage > * {
+    width: 100%;
+}
+
+section.configPage > .action > .action-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: row;
+}
+
+section.configPage > .action > .action-buttons > button {
+    width: 100%;
+}
+
+section.configPage > .countDown > .child-block {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+section.configPage > .countDown > .child-block > span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+section.configPage > .totalTime > .child-block {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+section.configPage > .totalTime > .child-block > h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+section.configPage > .totalTime > .child-block > span {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+section.configPage > .totalTime > .child-block > span>* {
     width: 100%;
 }

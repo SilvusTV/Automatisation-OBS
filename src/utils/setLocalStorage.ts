@@ -29,6 +29,9 @@ export default class setLs{
     static MICROPHONE_SELECTED(value:string) {
        localStorage.setItem('MICROPHONE_SELECTED', value)
     }
+    static MUSIC_SELECTED(value:string) {
+       localStorage.setItem('MUSIC_SELECTED', value)
+    }
     static TOTAL_TIME(value:number) {
        localStorage.setItem('TOTAL_TIME', value.toString())
     }

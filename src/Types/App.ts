@@ -1,6 +1,7 @@
 export type App = {
   //Global
   MicrophoneSelected: string;
+  MusicSelected: string;
   TotalTime: number;
   //Work
   WorkingMicrophone: boolean;

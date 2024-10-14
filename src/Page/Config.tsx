@@ -13,6 +13,7 @@ import {Download} from "../assets/Download.tsx";
 import {loadData, saveData} from "../utils/ImportExport.ts";
 import {Upload} from "../assets/Upload.tsx";
 import {ShowLocalStorage} from "./ShowLocalStorage.tsx";
+import {Edit} from "../assets/Edit.tsx";
 
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
@@ -78,52 +79,78 @@ export default function Config() {
     const input = getLs.MICROPHONE_SELECTED()
     obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
   }
+
   return (
     <>
       {connected ? (
-          <>
-            <div>
-              <button onClick={() => {
-                obs.disconnect().then(() => {
-                  setConnected(false)
-                  setLs.CONNECTED(false)
-                })
-              }}>
-                Disconnect
-              </button>
-              <button onClick={() => {
-                setLs.REFRESH(true)
-                getSceneList(obs).then((sceneList) => {
-                  setSceneList(sceneList.scenes.map(scene => scene.sceneName))
-                })
+          <section className={"configPage"}>
+            <div className={"action block"}>
+              <h2>Actions</h2>
+              <div className={"child-block action-buttons "}>
+                <button onClick={() => {
+                  obs.disconnect().then(() => {
+                    setConnected(false)
+                    setLs.CONNECTED(false)
+                  })
+                }}>
+                  Disconnect
+                </button>
+                <button onClick={() => {
+                  setLs.REFRESH(true)
+                  getSceneList(obs).then((sceneList) => {
+                    setSceneList(sceneList.scenes.map(scene => scene.sceneName))
+                  })
 
-                getInputList(obs).then((inputList) => {
-                  setInputList(inputList.inputs.map(input => input.inputName))
-                })
-              }}>
-                Refresh
-              </button>
+                  getInputList(obs).then((inputList) => {
+                    setInputList(inputList.inputs.map(input => input.inputName))
+                  })
+                }}>
+                  Refresh
+                </button>
+              </div>
             </div>
-            <div className={"countDown"}>
-              <span>
-                <p>Countdown: {showTime(counter)}</p>
+            <div className={"countDown block"}>
+              <h2>Décompte</h2>
+              <div className={"child-block"}>
+                <span>
+                  <span>
+                    <button onClick={() => setCounter(counter - toMinutes(1))}><p>-1</p></button>
+                    <button onClick={() => setCounter(counter - toMinutes(2))}><p>-2</p></button>
+                    <button onClick={() => setCounter(counter - toMinutes(5))}><p>-5</p></button>
+                  </span>
+                  <h3>{showTime(counter)}</h3>
+                  <span>
+                    <button onClick={() => setCounter(counter + toMinutes(1))}><p>+1</p></button>
+                    <button onClick={() => setCounter(counter + toMinutes(2))}><p>+2</p></button>
+                    <button onClick={() => setCounter(counter + toMinutes(5))}><p>+5</p></button>
+                  </span>
+              </span>
                 <button onClick={() => {
                   setTimePaused(!timePaused)
                 }}>
                   {timePaused ? <Play className={"icon"}/> : <Pause className={"icon"}/>}
                 </button>
-              </span>
-              <button onClick={() => setCounter(counter + toMinutes(1))}><p>+1</p></button>
-              <button onClick={() => setCounter(counter + toMinutes(5))}><p>+5</p></button>
+
+              </div>
             </div>
-            <div>
-              <button onClick={() => setShowSeconds(!showSeconds)}>
-                <p>Total time: {showSeconds ? showTime(totalTime) : showTimeWithoutSeconds(totalTime)}</p>
-                {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
-              </button>
+            <div className={"totalTime block"}>
+              <h2>Temps total</h2>
+              <div className="child-block">
+                <h3>{showSeconds ? showTime(totalTime) : showTimeWithoutSeconds(totalTime)}</h3>
+                <span>
+                  <button onClick={() => setShowSeconds(!showSeconds)}>
+                    <p>Afficher secondes</p>
+                    {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
+                  </button>
+                  <button>
+                    <p className={"text-w-icon"}>Modifier <Edit/></p>
+                  </button>
+                </span>
+              </div>
+
             </div>
             <AddConfiguration sceneList={sceneList} inputList={inputList}/>
-          </>
+          </section>
         ) :
         (
           <section className={"ConnectPage"}>

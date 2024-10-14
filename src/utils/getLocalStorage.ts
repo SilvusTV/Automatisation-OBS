@@ -30,6 +30,9 @@ export default class getLs{
     static MICROPHONE_SELECTED(): string {
         return localStorage.getItem('MICROPHONE_SELECTED') || ''
     }
+    static MUSIC_SELECTED(): string {
+        return localStorage.getItem('MUSIC_SELECTED') || ''
+    }
     static TOTAL_TIME(): number {
         return parseInt(localStorage.getItem('TOTAL_TIME') || '0')
     }

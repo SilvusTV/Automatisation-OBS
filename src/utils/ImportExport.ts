@@ -35,6 +35,7 @@ export function loadData(e: React.ChangeEvent<HTMLInputElement>){
 export function getData(){
   return {
     MicrophoneSelected: getLs.MICROPHONE_SELECTED(),
+    MusicSelected: getLs.MUSIC_SELECTED(),
     TotalTime: getLs.TOTAL_TIME(),
     WorkingMicrophone: getLs.WORKING_MICROPHONE(),
     WorkingScene: getLs.WORKING_SCENE(),
