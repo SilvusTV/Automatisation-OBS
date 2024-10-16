@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import Config from "./Page/Config.tsx";
-import Screen from "./Page/Scren.tsx";
+import Screen from "./Page/Screen.tsx";
 
 export default function App() {
   return (

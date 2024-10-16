@@ -3,6 +3,8 @@ import getLs from "../utils/getLocalStorage.ts";
 import setLs from "../utils/setLocalStorage.ts";
 import {showTime} from "../utils/utils.ts";
 
+import "../assets/style/screen.css";
+
 export default function Screen() {
     const [counter, setCounter] = useState(0);
 

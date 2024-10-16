@@ -15,6 +15,8 @@ import {Upload} from "../assets/Upload.tsx";
 import {ShowLocalStorage} from "./ShowLocalStorage.tsx";
 import {Edit} from "../assets/Edit.tsx";
 
+import "../assets/style/config.css";
+
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
   const [obs, setObs] = useState<OBSWebSocket>(new OBSWebSocket());
