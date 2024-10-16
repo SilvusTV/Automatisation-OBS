@@ -12,9 +12,9 @@
     --input-low: #17641e;
     --input-med: #6e520d;
     --input-high: #7d1224;
-    --input-low-greyscale:#5a5a5a;
-    --input-med-greyscale:#757575;
-    --input-high-greyscale:#414141;
+    --input-low-greyscale: #5a5a5a;
+    --input-med-greyscale: #757575;
+    --input-high-greyscale: #414141;
 }
 
 * {
@@ -52,9 +52,10 @@ button:active, input:active, .import:active, select:active {
     background: var(--input-hover);
     border: solid 1px var(--button-bg);
 }
+
 select:focus {
     background: var(--input-hover);
-    border:1px solid var(--select-selected);
+    border: 1px solid var(--select-selected);
 }
 
 input[type=file] {
@@ -181,6 +182,7 @@ section.configPage > .totalTime > .child-block {
     flex-direction: column;
     align-items: center;
 }
+
 section.configPage > .totalTime > .child-block > h3 {
     font-size: 1.5rem;
     font-weight: bold;
@@ -188,15 +190,18 @@ section.configPage > .totalTime > .child-block > h3 {
     display: flex;
     justify-content: space-between;
 }
+
 section.configPage > .totalTime > .child-block > span {
     width: 100%;
     display: flex;
     justify-content: space-between;
     gap: 5px;
 }
-section.configPage > .totalTime > .child-block > span>* {
+
+section.configPage > .totalTime > .child-block > span > * {
     width: 100%;
 }
+
 section.configPage > .totalTime > .child-block > div {
     display: flex;
     gap: 5px;
@@ -204,17 +209,108 @@ section.configPage > .totalTime > .child-block > div {
     flex-direction: column;
     align-items: center;
 }
-section.configPage > .totalTime > .child-block > div > .input > input{
+
+section.configPage > .totalTime > .child-block > div > .input > input {
     width: 25%;
     margin: 5px;
 }
-section.configPage > .totalTime > .child-block > div > .action{
+
+section.configPage > .totalTime > .child-block > div > .action {
     width: 100%;
     display: flex;
     gap: 5px;
     justify-content: center;
     flex-direction: row;
 }
-section.configPage > .totalTime > .child-block > div > .action > button{
+
+section.configPage > .totalTime > .child-block > div > .action > button {
     width: 100%;
+}
+
+section.configPage > .config {
+    background: var(--input-hover);
+    gap: 0;
+}
+
+section.configPage > .config > .child-block {
+    padding: 0;
+    gap: 0;
+}
+
+section.configPage > .config > .child-block > .list-child {
+    background: var(--bg);
+    padding: 3px 5px;
+    border-bottom: 1px solid var(--button-bg);
+}
+
+section.configPage > .config > .child-block > .list-child > div {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+section.configPage > .config > .child-block > .list-child > div > .audio-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+}
+
+section.configPage > .config > .child-block > .list-child > div > .audio-buttons > button {
+    width: 100%;
+}
+
+section.configPage > .config > .child-block > .list-child > div > span > input[type="number"] {
+    width: 4rem;
+}
+
+section.configPage > .config > .child-block > .list-child > div > .volume {
+    display: flex;
+    flex-direction: column;
+}
+
+section.configPage > .config > .child-block > .list-child > div > .volume > label {
+    width: 100%;
+    text-align: end;
+    font-size: 0.8rem;
+}
+
+section.configPage > .config > .child-block > .list-child > div > .volume > input[type="range"] {
+    width: 100%;
+    appearance: none;
+    margin: 7px 0;
+    padding: 0; /* nécessaire pour IE */
+    font: inherit; /* même rendu suivant font document */
+    outline: none;
+    opacity: .8;
+    background: var(--input-low);
+    background: linear-gradient(90deg, var(--input-low) 75%, var(--input-med) 75%, var(--input-med) 90%, var(--input-high) 90%);
+    box-sizing: border-box; /* même modèle de boîte pour tous */
+    transition: opacity .2s;
+    cursor: pointer;
+}
+
+section.configPage > .config > .child-block > .list-child > div > .volume > input[type="range"].disabled {
+    background: var(--input-low-greyscale);
+    background: linear-gradient(90deg, var(--input-low-greyscale) 75%, var(--input-med-greyscale) 75%, var(--input-med-greyscale) 90%, var(--input-high-greyscale) 90%);
+}
+
+section.configPage > .config > .child-block > .list-child > div > .volume > input[type="range"]:hover {
+    outline: none;
+    border: solid 1px var(--bg);
+}
+
+section.configPage > .config > .child-block > .list-child > div > .volume > input[type="range"]::-webkit-slider-thumb {
+    transform: scale(1.35);
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    width: .5rem;
+    height: 1rem;
+    background: var(--text-color);
+    cursor: pointer;
+}
+
+section.configPage > .config > .child-block > .list-child > div > .volume > input[type="range"][step="50"] {
+    -webkit-appearance: none;
+    background: red;
 }
