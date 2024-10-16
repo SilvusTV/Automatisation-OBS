@@ -35,4 +35,16 @@ export default class setLs{
     static TOTAL_TIME(value:number) {
        localStorage.setItem('TOTAL_TIME', value.toString())
     }
+    static WORKING_MUSIC(value:boolean) {
+       localStorage.setItem('WORKING_MUSIC', value.toString())
+    }
+    static WORKING_MUSIC_VOLUME(value:number) {
+       localStorage.setItem('WORKING_MUSIC_VOLUME', value.toString())
+    }
+    static PAUSE_MUSIC(value:boolean) {
+       localStorage.setItem('PAUSE_MUSIC', value.toString())
+    }
+    static PAUSE_MUSIC_VOLUME(value:number) {
+       localStorage.setItem('PAUSE_MUSIC_VOLUME', value.toString())
+    }
 }

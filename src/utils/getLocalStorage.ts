@@ -36,4 +36,16 @@ export default class getLs{
     static TOTAL_TIME(): number {
         return parseInt(localStorage.getItem('TOTAL_TIME') || '0')
     }
+    static WORKING_MUSIC(): boolean {
+        return localStorage.getItem('WORKING_MUSIC') === 'true'
+    }
+    static WORKING_MUSIC_VOLUME(): number {
+        return parseInt(localStorage.getItem('WORKING_MUSIC_VOLUME') || '0')
+    }
+    static PAUSE_MUSIC(): boolean {
+        return localStorage.getItem('PAUSE_MUSIC') === 'true'
+    }
+    static PAUSE_MUSIC_VOLUME(): number {
+        return parseInt(localStorage.getItem('PAUSE_MUSIC_VOLUME') || '0')
+    }
 }

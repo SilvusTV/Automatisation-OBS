@@ -7,7 +7,14 @@
     --select-hover: #476bd7;
     --select-selected: #284cb8;
     --input-hover: #1d1f26;
-    --text-color: #d5d7de
+    --text-color: #d5d7de;
+
+    --input-low: #17641e;
+    --input-med: #6e520d;
+    --input-high: #7d1224;
+    --input-low-greyscale:#5a5a5a;
+    --input-med-greyscale:#757575;
+    --input-high-greyscale:#414141;
 }
 
 * {
@@ -188,5 +195,26 @@ section.configPage > .totalTime > .child-block > span {
     gap: 5px;
 }
 section.configPage > .totalTime > .child-block > span>* {
+    width: 100%;
+}
+section.configPage > .totalTime > .child-block > div {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+section.configPage > .totalTime > .child-block > div > .input > input{
+    width: 25%;
+    margin: 5px;
+}
+section.configPage > .totalTime > .child-block > div > .action{
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: row;
+}
+section.configPage > .totalTime > .child-block > div > .action > button{
     width: 100%;
 }

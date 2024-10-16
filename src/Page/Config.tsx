@@ -29,6 +29,9 @@ export default function Config() {
   const [timePaused, setTimePaused] = useState(false);
   const [showSeconds, setShowSeconds] = useState(false);
   const [showLocalStorages, setShowLocalStorages] = useState(false);
+  const [updateTotalTime, setUpdateTotalTime] = useState(false);
+  const [updateHour, setUpdateHour] = useState(showTime(totalTime).split(":")[0]);
+  const [updateMin, setUpdateMin] = useState(showTime(totalTime).split(":")[1]);
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -53,11 +56,13 @@ export default function Config() {
               setWorkScene(false)
               changeScene(getLs.PAUSE_SCENE())
               changeMicrophoneState(getLs.PAUSE_MICROPHONE())
+              changeMusicVolume(getLs.PAUSE_MUSIC(), getLs.PAUSE_MUSIC_VOLUME())
             } else {
               setCounter(workingTime)
               setWorkScene(true)
               changeScene(getLs.WORKING_SCENE())
               changeMicrophoneState(getLs.WORKING_MICROPHONE())
+              changeMusicVolume(getLs.WORKING_MUSIC(), getLs.WORKING_MUSIC_VOLUME())
             }
           }
         };
@@ -78,6 +83,11 @@ export default function Config() {
   function changeMicrophoneState(state: boolean) {
     const input = getLs.MICROPHONE_SELECTED()
     obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
+  }
+  function changeMusicVolume(state: boolean, volume: number) {
+    const input = getLs.MUSIC_SELECTED()
+    obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
+    obs.call("SetInputVolume", {"inputName": input, "inputVolumeDb": volume})
   }
 
   return (
@@ -142,10 +152,39 @@ export default function Config() {
                     <p>Afficher secondes</p>
                     {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
                   </button>
-                  <button>
+                  <button onClick={() => setUpdateTotalTime(!updateTotalTime)}>
                     <p className={"text-w-icon"}>Modifier <Edit/></p>
                   </button>
                 </span>
+                {updateTotalTime && (
+                  <div>
+                    <span className="input">
+                      <input name={"hour"}
+                             type="number"
+                             value={updateHour}
+                             onChange={e => setUpdateHour(e.target.value)}
+                             defaultValue={showTime(totalTime).split(":")[0]}
+                      />
+                      <label htmlFor="hour">heures</label>
+                      <input name={"min"}
+                             type="number"
+                             value={updateMin}
+                             onChange={e => setUpdateMin(e.target.value)}
+                             defaultValue={showTime(totalTime).split(":")[1]}
+                      />
+                      <label htmlFor="min">minutes</label>
+                    </span>
+                    <span className="action">
+                      <button onClick={() => {
+                        const newTotalTime = (parseInt(updateHour) * 60 + parseInt(updateMin))*60
+                        setTotalTime(newTotalTime)
+                        setLs.TOTAL_TIME(newTotalTime)
+                        setUpdateTotalTime(false)
+                      }}>Valider</button>
+                      <button onClick={() => setUpdateTotalTime(false)}>Annuler</button>
+                    </span>
+                  </div>
+                )}
               </div>
 
             </div>
