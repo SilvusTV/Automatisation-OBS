@@ -50,4 +50,7 @@ export default class setLs{
     static IS_WORK_SCENE(value:boolean) {
        localStorage.setItem('IS_WORK_SCENE', value.toString())
     }
+    static WORKING_TIME_GOAL(value:number) {
+       localStorage.setItem('WORKING_TIME_GOAL', value.toString())
+    }
 }

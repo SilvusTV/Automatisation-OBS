@@ -4,6 +4,7 @@ export type App = {
   MusicSelected: string;
   TotalTime: number;
   IsWorkScene: boolean;
+  WorkingTimeGoal: number;
   //Work
   WorkingMicrophone: boolean;
   WorkingScene: string;

@@ -35,6 +35,7 @@ export default function Config() {
   const [updateTotalTime, setUpdateTotalTime] = useState(false);
   const [updateHour, setUpdateHour] = useState(showTime(totalTime).split(":")[0]);
   const [updateMin, setUpdateMin] = useState(showTime(totalTime).split(":")[1]);
+  const [workingTimeGoal, setWorkingTimeGoal] = useState(getLs.WORKING_TIME_GOAL());
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -202,6 +203,19 @@ export default function Config() {
                     </span>
                   </div>
                 )}
+                <span className="totalTimeGoal">
+                  <span>
+                    <label>Objectif de temps de travail : </label>
+                    <input type="number"
+                           value={workingTimeGoal}
+                           onChange={e => {
+                             setWorkingTimeGoal(parseInt(e.target.value))
+                             setLs.WORKING_TIME_GOAL(parseInt(e.target.value))
+                           }}
+                    />
+                    <label>heures</label>
+                  </span>
+                </span>
               </div>
 
             </div>

@@ -226,6 +226,9 @@ section.configPage > .totalTime > .child-block > div > .action {
 section.configPage > .totalTime > .child-block > div > .action > button {
     width: 100%;
 }
+section.configPage > .totalTime > .child-block > .totalTimeGoal > span > input {
+    width: 20%;
+}
 
 section.configPage > .config {
     background: var(--input-hover);

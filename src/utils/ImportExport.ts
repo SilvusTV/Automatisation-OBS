@@ -23,6 +23,8 @@ export function loadData(e: React.ChangeEvent<HTMLInputElement>){
     localStorage.setItem('MICROPHONE_SELECTED', data.MicrophoneSelected)
     localStorage.setItem('MUSIC_SELECTED', data.MusicSelected)
     localStorage.setItem('TOTAL_TIME', data.TotalTime.toString())
+    localStorage.setItem('WORKING_TIME_GOAL', data.WorkingTimeGoal.toString())
+    localStorage.setItem('IS_WORK_SCENE', data.IsWorkScene.toString())
     localStorage.setItem('WORKING_MICROPHONE', data.WorkingMicrophone.toString())
     localStorage.setItem('WORKING_SCENE', data.WorkingScene)
     localStorage.setItem('WORKING_TIME', data.WorkingTime.toString())
@@ -33,7 +35,6 @@ export function loadData(e: React.ChangeEvent<HTMLInputElement>){
     localStorage.setItem('PAUSE_TIME', data.PauseTime.toString())
     localStorage.setItem('PAUSE_MUSIC', data.PauseMusic.toString())
     localStorage.setItem('PAUSE_MUSIC_VOLUME', data.PauseMusicVolume.toString())
-    localStorage.setItem('IS_WORK_SCENE', data.IsWorkScene.toString())
 
   }
   reader.readAsText(file)
@@ -44,6 +45,8 @@ export function getData(){
     MicrophoneSelected: getLs.MICROPHONE_SELECTED(),
     MusicSelected: getLs.MUSIC_SELECTED(),
     TotalTime: getLs.TOTAL_TIME(),
+    WorkingTimeGoal: getLs.WORKING_TIME_GOAL(),
+    IsWorkScene: getLs.IS_WORK_SCENE(),
     WorkingMicrophone: getLs.WORKING_MICROPHONE(),
     WorkingScene: getLs.WORKING_SCENE(),
     WorkingTime: getLs.WORKING_TIME(),
@@ -54,7 +57,5 @@ export function getData(){
     PauseTime: getLs.PAUSE_TIME(),
     PauseMusic: getLs.PAUSE_MUSIC(),
     PauseMusicVolume: getLs.PAUSE_MUSIC_VOLUME(),
-    IsWorkScene: getLs.IS_WORK_SCENE()
-
   } as App
 }

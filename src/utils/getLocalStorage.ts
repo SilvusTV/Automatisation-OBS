@@ -51,4 +51,7 @@ export default class getLs{
     static IS_WORK_SCENE(): boolean {
         return localStorage.getItem('IS_WORK_SCENE') === 'true'
     }
+    static WORKING_TIME_GOAL(): number {
+        return parseInt(localStorage.getItem('WORKING_TIME_GOAL') || '0')
+    }
 }
