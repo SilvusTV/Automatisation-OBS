@@ -39,6 +39,40 @@
     font-size: 47.5pt;
     font-family: 'Covered by your grace';
 }
+.totalTimeGroup{
+    top: 145px;
+    left: 405px;
+    width: 225px;
+    height: 60px;
+    position: absolute;
+    color: var(--purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Brodaers Expanded';
+}
+.totalTimeGroup > p{
+    font-size: 23pt;
+}
+.totalTimeGroup > .totalTimeScreen > p{
+    font-size: 23pt;
+}
+.totalTimeGroup > .totalTimeScreen.two-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.totalTimeGroup > .totalTimeScreen.two-lines > p{
+    font-size: 15pt;
+    margin-top: 10px;
+}
+.totalTimeGroup > .totalTimeScreen.two-lines > span{
+    display: flex;
+    gap: 5px;
+}
+.totalTimeGroup > .totalTimeScreen.two-lines > span> p{
+    font-size: 10pt;
+}
 .countdown{
     width: 250px;
     height: 115px;
