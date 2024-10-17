@@ -32,8 +32,8 @@ export default function Screen() {
             <p className="workingTime">{(workingTime<10) ? "0"+workingTime:workingTime}</p>
             <p className="pauseTime">{pauseTime}</p>
           </div>
-          <div className={"totalTimeGroup"}>
-            <div className={clsx("totalTimeScreen",getLs.SHOW_WORKING_TIME_MINUTES()&&"two-lines")}>
+          <div className={clsx("totalTimeGroup",getLs.SHOW_WORKING_TIME_MINUTES()&&"two-lines")}>
+            <div className={"totalTimeScreen"}>
               <p className={"totalTime"}>{showTimeWithoutMinutes(totalWorkingTime)}H</p>
               <span>
                 {getLs.SHOW_WORKING_TIME_MINUTES() &&
@@ -41,7 +41,8 @@ export default function Screen() {
                 {getLs.SHOW_WORKING_TIME_SECONDS() && <p className={"totalTime"}>{showTime(totalWorkingTime).split(":")[2]}S</p>}
               </span>
             </div>
-            <p className={"totalTimeGoal"}>/{getLs.WORKING_TIME_GOAL()}H</p>
+            <p className={"separator"}>/</p>
+            <p className={"totalTimeGoal"}>{getLs.WORKING_TIME_GOAL()}H</p>
           </div>
             <div className={"countdown"}>
                 <p className={"white"}>{showTime(counter)}</p>
