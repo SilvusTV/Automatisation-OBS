@@ -4,7 +4,7 @@ import {getInputList, getObs, getSceneList} from "../utils/obs.ts";
 import setLs from "../utils/setLocalStorage.ts";
 import AddConfiguration from "./Config/addConfiguration.tsx";
 import getLs from "../utils/getLocalStorage.ts";
-import {showTime, showTimeWithoutSeconds, toMinutes} from "../utils/utils.ts";
+import {showTime, showTimeWithoutMinutes, showTimeWithoutSeconds, toMinutes} from "../utils/utils.ts";
 import {Play} from "../assets/Play.tsx";
 import {Pause} from "../assets/Pause.tsx";
 import {VisibilityOff} from "../assets/VisibilityOff.tsx";
@@ -30,6 +30,7 @@ export default function Config() {
   const [totalTime, setTotalTime] = useState(getLs.TOTAL_TIME());
   const [timePaused, setTimePaused] = useState(false);
   const [showSeconds, setShowSeconds] = useState(false);
+  const [showMinutes, setShowMinutes] = useState(false);
   const [showLocalStorages, setShowLocalStorages] = useState(false);
   const [updateTotalTime, setUpdateTotalTime] = useState(false);
   const [updateHour, setUpdateHour] = useState(showTime(totalTime).split(":")[0]);
@@ -150,12 +151,24 @@ export default function Config() {
             <div className={"totalTime block"}>
               <h2>Temps total</h2>
               <div className="child-block">
-                <h3>{showSeconds ? showTime(totalTime) : showTimeWithoutSeconds(totalTime)}</h3>
+                <h3>{
+                  showSeconds ?
+                    showTime(totalTime) :
+                    showMinutes ?
+                      showTimeWithoutSeconds(totalTime) :
+                      showTimeWithoutMinutes(totalTime)
+                }</h3>
                 <span>
-                  <button onClick={() => setShowSeconds(!showSeconds)}>
-                    <p>Afficher secondes</p>
-                    {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
+                  <button onClick={() => {setShowMinutes(!showMinutes); setShowSeconds(false)}}>
+                    <p>Afficher minutes</p>
+                    {showMinutes ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
                   </button>
+                  {showMinutes && (
+                    <button onClick={() => setShowSeconds(!showSeconds)}>
+                      <p>Afficher secondes</p>
+                      {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
+                    </button>
+                  )}
                   <button onClick={() => setUpdateTotalTime(!updateTotalTime)}>
                     <p className={"text-w-icon"}>Modifier <Edit/></p>
                   </button>

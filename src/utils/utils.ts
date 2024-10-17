@@ -15,3 +15,6 @@ export function showTimeWithoutSeconds(time: number) {
   const minutes = Math.floor((time / 60) % 60)
   return (hours > 0 ? hours + ':' : '') + (minutes < 10 ? '0' : '') + minutes
 }
+export function showTimeWithoutMinutes(time: number) {
+  return Math.floor(time / 3600)
+}

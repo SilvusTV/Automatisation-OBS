@@ -46,11 +46,11 @@ export default function Screen() {
         </>
       ) : (
         <section className={"page-pause"}>
-            <div className="recap">
-                <p className="workingTime">{workingTime}</p>
-                <p className="pauseTime">{pauseTime}</p>
-            </div>
-            <div className={"countdown"}>
+          <div className="recap">
+            <p className="workingTime">{workingTime}</p>
+            <p className="pauseTime">{pauseTime}</p>
+          </div>
+          <div className={"countdown"}>
                 <p>{showTime(counter)}</p>
                 <style>
                     {`
@@ -63,7 +63,7 @@ export default function Screen() {
                         <video src={countdownBar} autoPlay={true} loop={true}></video>
                     </div>
                 </div>
-            </section>
-          )
+        </section>
+      )
     )
 }
