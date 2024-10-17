@@ -160,12 +160,22 @@ export default function Config() {
                       showTimeWithoutMinutes(totalTime)
                 }</h3>
                 <span>
-                  <button onClick={() => {setShowMinutes(!showMinutes); setShowSeconds(false)}}>
+                  <button onClick={() => {
+                    setShowMinutes(!showMinutes)
+                    setLs.SHOW_WORKING_TIME_MINUTES(!showMinutes)
+                    setShowSeconds(false)
+                    setLs.SHOW_WORKING_TIME_SECONDS(false)
+                  }}
+                  >
                     <p>Afficher minutes</p>
                     {showMinutes ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
                   </button>
                   {showMinutes && (
-                    <button onClick={() => setShowSeconds(!showSeconds)}>
+                    <button onClick={() => {
+                      setShowSeconds(!showSeconds)
+                      setLs.SHOW_WORKING_TIME_SECONDS(!showSeconds)
+                    }}
+                    >
                       <p>Afficher secondes</p>
                       {showSeconds ? <VisibilityOff className={"icon"}/> : <Visibility className={"icon"}/>}
                     </button>

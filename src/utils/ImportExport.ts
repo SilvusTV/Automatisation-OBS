@@ -24,6 +24,8 @@ export function loadData(e: React.ChangeEvent<HTMLInputElement>){
     localStorage.setItem('MUSIC_SELECTED', data.MusicSelected)
     localStorage.setItem('TOTAL_TIME', data.TotalTime.toString())
     localStorage.setItem('WORKING_TIME_GOAL', data.WorkingTimeGoal.toString())
+    localStorage.setItem('SHOW_WORKING_TIME_MINUTES', data.ShowWorkingTimeMinutes.toString())
+    localStorage.setItem('SHOW_WORKING_TIME_SECONDS', data.ShowWorkingTimeSeconds.toString())
     localStorage.setItem('IS_WORK_SCENE', data.IsWorkScene.toString())
     localStorage.setItem('WORKING_MICROPHONE', data.WorkingMicrophone.toString())
     localStorage.setItem('WORKING_SCENE', data.WorkingScene)
@@ -46,6 +48,8 @@ export function getData(){
     MusicSelected: getLs.MUSIC_SELECTED(),
     TotalTime: getLs.TOTAL_TIME(),
     WorkingTimeGoal: getLs.WORKING_TIME_GOAL(),
+    ShowWorkingTimeMinutes: getLs.SHOW_WORKING_TIME_MINUTES(),
+    ShowWorkingTimeSeconds: getLs.SHOW_WORKING_TIME_SECONDS(),
     IsWorkScene: getLs.IS_WORK_SCENE(),
     WorkingMicrophone: getLs.WORKING_MICROPHONE(),
     WorkingScene: getLs.WORKING_SCENE(),

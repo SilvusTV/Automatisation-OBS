@@ -5,6 +5,8 @@ export type App = {
   TotalTime: number;
   IsWorkScene: boolean;
   WorkingTimeGoal: number;
+  ShowWorkingTimeMinutes: boolean;
+  ShowWorkingTimeSeconds: boolean;
   //Work
   WorkingMicrophone: boolean;
   WorkingScene: string;

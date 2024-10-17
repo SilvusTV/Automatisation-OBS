@@ -53,4 +53,10 @@ export default class setLs{
     static WORKING_TIME_GOAL(value:number) {
        localStorage.setItem('WORKING_TIME_GOAL', value.toString())
     }
+    static SHOW_WORKING_TIME_MINUTES(value:boolean) {
+       localStorage.setItem('SHOW_WORKING_TIME_MINUTES', value.toString())
+    }
+    static SHOW_WORKING_TIME_SECONDS(value:boolean) {
+       localStorage.setItem('SHOW_WORKING_TIME_SECONDS', value.toString())
+    }
 }

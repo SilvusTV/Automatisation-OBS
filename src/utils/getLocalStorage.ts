@@ -54,4 +54,10 @@ export default class getLs{
     static WORKING_TIME_GOAL(): number {
         return parseInt(localStorage.getItem('WORKING_TIME_GOAL') || '0')
     }
+    static SHOW_WORKING_TIME_MINUTES(): boolean {
+        return localStorage.getItem('SHOW_WORKING_TIME_MINUTES') === 'true'
+    }
+    static SHOW_WORKING_TIME_SECONDS(): boolean {
+        return localStorage.getItem('SHOW_WORKING_TIME_SECONDS') === 'true'
+    }
 }
