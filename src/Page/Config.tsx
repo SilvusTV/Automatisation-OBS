@@ -51,10 +51,10 @@ export default function Config() {
         setTotalTime(totalTime + 1)
         setLs.TOTAL_TIME(totalTime + 1)
         setLs.COUNTER(counter)
-        const timer = counter >= 0 && setInterval(() => setCounter(counter - 1), 1000);
+        const timer = setInterval(() => setCounter(counter - 1), 1000);
         return () => {
           clearInterval(timer as number)
-          if (counter === 0) {
+          if (counter <= 0) {
             if (workScene) {
               setCounter(pauseTime)
               setWorkScene(false)
