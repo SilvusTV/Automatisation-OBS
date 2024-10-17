@@ -47,4 +47,7 @@ export default class setLs{
     static PAUSE_MUSIC_VOLUME(value:number) {
        localStorage.setItem('PAUSE_MUSIC_VOLUME', value.toString())
     }
+    static IS_WORK_SCENE(value:boolean) {
+       localStorage.setItem('IS_WORK_SCENE', value.toString())
+    }
 }

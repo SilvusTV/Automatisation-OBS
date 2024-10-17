@@ -1,0 +1,83 @@
+@import url(./fonts.css);
+:root{
+    --white: #f0ebff;
+    --green: #b8ea57;
+    --purple: #6145bd;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+}
+.recap{
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    top: 115px;
+    left: 125px;
+}
+.workingTime{
+    color: var(--white);
+    font-size: 47.5pt;
+    font-family: 'Brodaers Expanded';
+}
+.pauseTime{
+    top: 0;
+    left: 195px;
+    line-height: 40pt;
+    position: absolute;
+    color: var(--green);
+    font-size: 47.5pt;
+    font-family: 'Covered by your grace';
+}
+.countdown{
+    width: 250px;
+    height: 115px;
+    position: absolute;
+    bottom: 115px;
+    right: 96px;
+}
+.white{
+    color: var(--white) !important;
+}
+.countdown > p{
+    width: 100%;
+    text-align: center;
+    color: var(--purple);
+    font-size: 45pt;
+    line-height: 60pt;
+    font-family: 'Brodaers Expanded';
+}
+.countdown-bar{
+    width: 98%;
+    margin-left: 1px;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    border-bottom-right-radius: 27px;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+.countdown-bar::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: var(--green);
+
+}
+.countdown-bar > video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}

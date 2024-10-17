@@ -56,12 +56,14 @@ export default function Config() {
             if (workScene) {
               setCounter(pauseTime)
               setWorkScene(false)
+              setLs.IS_WORK_SCENE(false)
               changeScene(getLs.PAUSE_SCENE())
               changeMicrophoneState(getLs.PAUSE_MICROPHONE())
               changeMusicVolume(getLs.PAUSE_MUSIC(), getLs.PAUSE_MUSIC_VOLUME())
             } else {
               setCounter(workingTime)
               setWorkScene(true)
+              setLs.IS_WORK_SCENE(true)
               changeScene(getLs.WORKING_SCENE())
               changeMicrophoneState(getLs.WORKING_MICROPHONE())
               changeMusicVolume(getLs.WORKING_MUSIC(), getLs.WORKING_MUSIC_VOLUME())

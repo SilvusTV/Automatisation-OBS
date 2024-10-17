@@ -48,4 +48,7 @@ export default class getLs{
     static PAUSE_MUSIC_VOLUME(): number {
         return parseInt(localStorage.getItem('PAUSE_MUSIC_VOLUME') || '0')
     }
+    static IS_WORK_SCENE(): boolean {
+        return localStorage.getItem('IS_WORK_SCENE') === 'true'
+    }
 }

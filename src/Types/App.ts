@@ -3,6 +3,7 @@ export type App = {
   MicrophoneSelected: string;
   MusicSelected: string;
   TotalTime: number;
+  IsWorkScene: boolean;
   //Work
   WorkingMicrophone: boolean;
   WorkingScene: string;

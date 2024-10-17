@@ -33,6 +33,7 @@ export function loadData(e: React.ChangeEvent<HTMLInputElement>){
     localStorage.setItem('PAUSE_TIME', data.PauseTime.toString())
     localStorage.setItem('PAUSE_MUSIC', data.PauseMusic.toString())
     localStorage.setItem('PAUSE_MUSIC_VOLUME', data.PauseMusicVolume.toString())
+    localStorage.setItem('IS_WORK_SCENE', data.IsWorkScene.toString())
 
   }
   reader.readAsText(file)
@@ -53,6 +54,7 @@ export function getData(){
     PauseTime: getLs.PAUSE_TIME(),
     PauseMusic: getLs.PAUSE_MUSIC(),
     PauseMusicVolume: getLs.PAUSE_MUSIC_VOLUME(),
+    IsWorkScene: getLs.IS_WORK_SCENE()
 
   } as App
 }
