@@ -27,7 +27,7 @@ export default function Screen() {
       isWorkScene ? (
         <>
             <div className="recap">
-                <p className="workingTime">{workingTime}</p>
+                <p className="workingTime">{(workingTime<10) ? "0"+workingTime:workingTime}</p>
                 <p className="pauseTime">{pauseTime}</p>
             </div>
             <div className={"countdown"}>

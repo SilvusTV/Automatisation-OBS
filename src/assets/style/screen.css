@@ -19,11 +19,11 @@
 
 }
 .recap{
-    width: 200px;
+    width: 210px;
     height: 100px;
     position: absolute;
     top: 115px;
-    left: 125px;
+    left: 115px;
 }
 .workingTime{
     color: var(--white);
@@ -32,7 +32,7 @@
 }
 .pauseTime{
     top: 0;
-    left: 195px;
+    left: 205px;
     line-height: 40pt;
     position: absolute;
     color: var(--green);
