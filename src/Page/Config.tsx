@@ -157,7 +157,7 @@ export default function Config() {
                     showTime(totalTime) :
                     showMinutes ?
                       showTimeWithoutSeconds(totalTime) :
-                      showTimeWithoutMinutes(totalTime)
+                      showTimeWithoutMinutes(totalTime)+" H"
                 }</h3>
                 <span>
                   <button onClick={() => {
