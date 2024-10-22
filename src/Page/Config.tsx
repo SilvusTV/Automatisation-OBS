@@ -16,6 +16,7 @@ import {ShowLocalStorage} from "./ShowLocalStorage.tsx";
 import {Edit} from "../assets/Edit.tsx";
 
 import "../assets/style/config.css";
+import {ObsCredential} from "../Types/Credential.ts";
 
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
@@ -36,6 +37,9 @@ export default function Config() {
   const [updateHour, setUpdateHour] = useState(showTime(totalTime).split(":")[0]);
   const [updateMin, setUpdateMin] = useState(showTime(totalTime).split(":")[1]);
   const [workingTimeGoal, setWorkingTimeGoal] = useState(getLs.WORKING_TIME_GOAL());
+  const [host, setHost] = useState("localhost");
+  const [port, setPort] = useState(4455);
+  const [password, setPassword] = useState("")
 
   setInterval(function () {
     if (getLs.REFRESH()) {
@@ -76,8 +80,8 @@ export default function Config() {
     }
   }, [counter, connected, refresh, timePaused]);
 
-  async function connect() {
-    setObs(await getObs())
+  async function connect(credentials: ObsCredential) {
+    setObs(await getObs(credentials))
     setConnected(true);
     setLs.CONNECTED(true)
   }
@@ -234,11 +238,26 @@ export default function Config() {
         ) :
         (
           <section className={"ConnectPage"}>
+            {getLs.CREDENTIAL() ? null : (
+              <div className="connexion">
+                <span>
+                  <input placeholder={"host"} type="text" name={"host"} defaultValue={"localhost"} value={host} onChange={e=>setHost(e.target.value)}/>
+                  <input placeholder={"port"} type="number" name={"port"} defaultValue={"4455"} value={port} onChange={e=>setPort(parseInt(e.target.value))}/>
+                </span>
+                <input placeholder={"password"} type="password" name={"password"} value={password} onChange={e=>setPassword(e.target.value)}/>
+              </div>
+            )}
             <button
               className={"ConnectButton"}
               onClick={() => {
                 console.log('connect')
-                connect()
+                const credential:ObsCredential = {
+                  host: host,
+                  port: port,
+                  password: password
+                }
+                setLs.CREDENTIAL(credential)
+                connect(credential)
               }}
             >
               <p>Connecter</p>

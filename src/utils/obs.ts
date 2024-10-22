@@ -1,11 +1,12 @@
 import OBSWebSocket from "obs-websocket-js";
 import {SceneList} from "../Types/SceneList.ts";
 import {InputList} from "../Types/InputList.ts";
+import {ObsCredential} from "../Types/Credential.ts";
 
-export async function getObs() {
+export async function getObs(obsCredential: ObsCredential): Promise<OBSWebSocket> {
   const obs = new OBSWebSocket();
   await obs.disconnect()
-  await obs.connect("ws:localhost:4455", "T3zK4QUZea2nWAvi")
+  await obs.connect(`ws:${obsCredential.host}:${obsCredential.port}`, obsCredential.password);
   return obs;
 }
 

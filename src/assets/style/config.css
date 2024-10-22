@@ -101,7 +101,7 @@ input[type=file] {
 
 section.ConnectPage {
     padding: 2px;
-    gap: 2px;
+    gap: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -112,7 +112,27 @@ section.ConnectPage {
 section.ConnectPage > * {
     width: 100%;
 }
-
+section.ConnectPage > .connexion{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+section.ConnectPage > .connexion > span{
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+section.ConnectPage > .connexion > span>input[type="text"]{
+    width: 100%;
+}
+section.ConnectPage > .connexion > span>input[type="number"]{
+    width: 22%;
+}
+section.ConnectPage > .connexion > input{
+    width: 100%;
+}
 .devBlock {
     cursor: text;
     position: relative;

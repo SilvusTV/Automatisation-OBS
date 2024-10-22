@@ -1,3 +1,5 @@
+import {ObsCredential} from "../Types/Credential.ts";
+
 export default class setLs{
     static REFRESH(value:boolean) {
        localStorage.setItem('REFRESH', value.toString())
@@ -58,5 +60,8 @@ export default class setLs{
     }
     static SHOW_WORKING_TIME_SECONDS(value:boolean) {
        localStorage.setItem('SHOW_WORKING_TIME_SECONDS', value.toString())
+    }
+    static CREDENTIAL(value:ObsCredential) {
+        localStorage.setItem('CREDENTIAL', JSON.stringify(value))
     }
 }
