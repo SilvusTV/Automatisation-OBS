@@ -25,15 +25,15 @@ export default function AddConfiguration(props: {
         <h2>Entrée audios</h2>
         <div className="child-block">
           <label htmlFor={"micInput"}>Microphone</label>
-           <select name={"micInput"} onChange={event => setLs.MICROPHONE_SELECTED(event.currentTarget.value)}>
+           <select name={"micInput"} value={getLs.MICROPHONE_SELECTED()} onChange={event => setLs.MICROPHONE_SELECTED(event.currentTarget.value)}>
             {props.inputList?.map((input, index) => (
-              <option key={index} selected={input === getLs.MICROPHONE_SELECTED()}>{input}</option>
+              <option key={index}>{input}</option>
             ))}
           </select>
           <label htmlFor={"musicInput"}>Musique</label>
-          <select name={"musicInput"} onChange={event => setLs.MUSIC_SELECTED(event.currentTarget.value)}>
+          <select name={"musicInput"} value={getLs.MUSIC_SELECTED()} onChange={event => setLs.MUSIC_SELECTED(event.currentTarget.value)}>
             {props.inputList?.map((input, index) => (
-              <option key={index} selected={input === getLs.MUSIC_SELECTED()}>{input}</option>
+              <option key={index}>{input}</option>
             ))}
           </select>
         </div>
@@ -51,9 +51,9 @@ export default function AddConfiguration(props: {
                   setWorkingTime(workingTime)
                 }}/>
                 <label htmlFor="workingTime">min sur la scene</label>
-                <select name={"workingScene"} onChange={event => setLs.WORKING_SCENE(event.currentTarget.value)}>
+                <select name={"workingScene"} value={getLs.WORKING_SCENE()} onChange={event => setLs.WORKING_SCENE(event.currentTarget.value)}>
                   {props.sceneList?.map((scene, index) => (
-                    <option key={index} selected={scene === getLs.WORKING_SCENE()}>{scene}</option>
+                    <option key={index}>{scene}</option>
                   ))}
                 </select>
               </span>
@@ -90,9 +90,9 @@ export default function AddConfiguration(props: {
                   setPauseTime(pauseTime)
                 }}/>
                 <label htmlFor="pauseTime">min sur la scene</label>
-                <select name={"pauseScene"} onChange={event => setLs.PAUSE_SCENE(event.currentTarget.value)}>
+                <select name={"pauseScene"} value={getLs.PAUSE_SCENE()} onChange={event => setLs.PAUSE_SCENE(event.currentTarget.value)}>
                   {props.sceneList?.map((scene, index) => (
-                    <option key={index} selected={scene === getLs.PAUSE_SCENE()}>{scene}</option>
+                    <option key={index}>{scene}</option>
                   ))}
                 </select>
               </span>
