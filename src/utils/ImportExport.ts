@@ -1,5 +1,6 @@
 import {App} from "../Types/App.ts";
 import getLs from "./getLocalStorage.ts";
+import {ChangeEvent} from "react";
 
 export function saveData(){
 
@@ -13,7 +14,7 @@ export function saveData(){
   downloadAnchorNode.click();
   downloadAnchorNode.remove();
 }
-export function loadData(e: React.ChangeEvent<HTMLInputElement>){
+export function loadData(e: ChangeEvent<HTMLInputElement>){
   const file = e.target.files![0]
   const reader = new FileReader();
   reader.onload = function(e) {
