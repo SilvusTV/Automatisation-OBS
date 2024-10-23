@@ -82,6 +82,7 @@ export default function Config() {
 
   async function connect(credentials: ObsCredential) {
     setObs(await getObs(credentials))
+    console.log('connect')
     setConnected(true);
     setLs.CONNECTED(true)
   }
@@ -94,6 +95,7 @@ export default function Config() {
     const input = getLs.MICROPHONE_SELECTED()
     obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
   }
+
   function changeMusicVolume(state: boolean, volume: number) {
     const input = getLs.MUSIC_SELECTED()
     obs.call("SetInputMute", {"inputName": input, "inputMuted": !state})
@@ -161,7 +163,7 @@ export default function Config() {
                     showTime(totalTime) :
                     showMinutes ?
                       showTimeWithoutSeconds(totalTime) :
-                      showTimeWithoutMinutes(totalTime)+" H"
+                      showTimeWithoutMinutes(totalTime) + " H"
                 }</h3>
                 <span>
                   <button onClick={() => {
@@ -208,7 +210,7 @@ export default function Config() {
                     </span>
                     <span className="action">
                       <button onClick={() => {
-                        const newTotalTime = (parseInt(updateHour) * 60 + parseInt(updateMin))*60
+                        const newTotalTime = (parseInt(updateHour) * 60 + parseInt(updateMin)) * 60
                         setTotalTime(newTotalTime)
                         setLs.TOTAL_TIME(newTotalTime)
                         setUpdateTotalTime(false)
@@ -241,23 +243,29 @@ export default function Config() {
             {getLs.CREDENTIAL() ? null : (
               <div className="connexion">
                 <span>
-                  <input placeholder={"host"} type="text" name={"host"} defaultValue={"localhost"} value={host} onChange={e=>setHost(e.target.value)}/>
-                  <input placeholder={"port"} type="number" name={"port"} defaultValue={"4455"} value={port} onChange={e=>setPort(parseInt(e.target.value))}/>
+                  <input placeholder={"host"} type="text" name={"host"} defaultValue={"localhost"} value={host}
+                         onChange={e => setHost(e.target.value)}/>
+                  <input placeholder={"port"} type="number" name={"port"} defaultValue={"4455"} value={port}
+                         onChange={e => setPort(parseInt(e.target.value))}/>
                 </span>
-                <input placeholder={"password"} type="password" name={"password"} value={password} onChange={e=>setPassword(e.target.value)}/>
+                <input placeholder={"password"} type="password" name={"password"} value={password}
+                       onChange={e => setPassword(e.target.value)}/>
               </div>
             )}
             <button
               className={"ConnectButton"}
               onClick={() => {
-                console.log('connect')
-                const credential:ObsCredential = {
-                  host: host,
-                  port: port,
-                  password: password
+                if (getLs.CREDENTIAL()) {
+                  connect(getLs.CREDENTIAL()!)
+                } else {
+                  const credential: ObsCredential = {
+                    host: host,
+                    port: port,
+                    password: password
+                  }
+                  setLs.CREDENTIAL(credential)
+                  connect(credential)
                 }
-                setLs.CREDENTIAL(credential)
-                connect(credential)
               }}
             >
               <p>Connecter</p>
