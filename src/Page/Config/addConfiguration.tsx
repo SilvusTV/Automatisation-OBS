@@ -46,8 +46,9 @@ export default function AddConfiguration(props: {
             <div>
               <span>
                 <input type="number" name={"workingTime"} value={workingTime} onChange={event => {
-                  setLs.WORKING_TIME(event.target.value);
-                  setWorkingTime(parseInt(event.target.value))
+                  const workingTime = parseInt(event.target.value)
+                  setLs.WORKING_TIME(workingTime);
+                  setWorkingTime(workingTime)
                 }}/>
                 <label htmlFor="workingTime">min sur la scene</label>
                 <select name={"workingScene"} onChange={event => setLs.WORKING_SCENE(event.currentTarget.value)}>
@@ -84,8 +85,9 @@ export default function AddConfiguration(props: {
             <div>
               <span>
                 <input type="number" name={"pauseTime"} value={pauseTime} onChange={event => {
-                  setLs.PAUSE_TIME(event.target.value);
-                  setPauseTime(parseInt(event.target.value))
+                  const pauseTime = parseInt(event.target.value)
+                  setLs.PAUSE_TIME(pauseTime);
+                  setPauseTime(pauseTime)
                 }}/>
                 <label htmlFor="pauseTime">min sur la scene</label>
                 <select name={"pauseScene"} onChange={event => setLs.PAUSE_SCENE(event.currentTarget.value)}>

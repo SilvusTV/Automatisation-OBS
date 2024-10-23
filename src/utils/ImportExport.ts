@@ -1,6 +1,7 @@
 import {App} from "../Types/App.ts";
 import getLs from "./getLocalStorage.ts";
 import {ChangeEvent} from "react";
+import setLs from "./setLocalStorage.ts";
 
 export function saveData(){
 
@@ -21,24 +22,26 @@ export function loadData(e: ChangeEvent<HTMLInputElement>){
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const data = JSON.parse(e.target.result as string) as App
-    localStorage.setItem('MICROPHONE_SELECTED', data.MicrophoneSelected)
-    localStorage.setItem('MUSIC_SELECTED', data.MusicSelected)
-    localStorage.setItem('TOTAL_TIME', data.TotalTime.toString())
-    localStorage.setItem('WORKING_TIME_GOAL', data.WorkingTimeGoal.toString())
-    localStorage.setItem('SHOW_WORKING_TIME_MINUTES', data.ShowWorkingTimeMinutes.toString())
-    localStorage.setItem('SHOW_WORKING_TIME_SECONDS', data.ShowWorkingTimeSeconds.toString())
-    localStorage.setItem('IS_WORK_SCENE', data.IsWorkScene.toString())
-    localStorage.setItem('WORKING_MICROPHONE', data.WorkingMicrophone.toString())
-    localStorage.setItem('WORKING_SCENE', data.WorkingScene)
-    localStorage.setItem('WORKING_TIME', data.WorkingTime.toString())
-    localStorage.setItem('WORKING_MUSIC', data.WorkingMusic.toString())
-    localStorage.setItem('WORKING_MUSIC_VOLUME', data.WorkingMusicVolume.toString())
-    localStorage.setItem('PAUSE_MICROPHONE', data.PauseMicrophone.toString())
-    localStorage.setItem('PAUSE_SCENE', data.PauseScene)
-    localStorage.setItem('PAUSE_TIME', data.PauseTime.toString())
-    localStorage.setItem('PAUSE_MUSIC', data.PauseMusic.toString())
-    localStorage.setItem('PAUSE_MUSIC_VOLUME', data.PauseMusicVolume.toString())
-
+    console.log(data)
+    console.log(data.TotalTime)
+    console.log(data.TotalTime.toString())
+    setLs.MICROPHONE_SELECTED(data.MicrophoneSelected)
+    setLs.MUSIC_SELECTED(data.MusicSelected)
+    setLs.TOTAL_TIME(data.TotalTime)
+    setLs.WORKING_TIME_GOAL(data.WorkingTimeGoal)
+    setLs.SHOW_WORKING_TIME_MINUTES(data.ShowWorkingTimeMinutes)
+    setLs.SHOW_WORKING_TIME_SECONDS(data.ShowWorkingTimeSeconds)
+    setLs.IS_WORK_SCENE(data.IsWorkScene)
+    setLs.WORKING_MICROPHONE(data.WorkingMicrophone)
+    setLs.WORKING_SCENE(data.WorkingScene)
+    setLs.WORKING_TIME(data.WorkingTime)
+    setLs.WORKING_MUSIC(data.WorkingMusic)
+    setLs.WORKING_MUSIC_VOLUME(data.WorkingMusicVolume)
+    setLs.PAUSE_MICROPHONE(data.PauseMicrophone)
+    setLs.PAUSE_SCENE(data.PauseScene)
+    setLs.PAUSE_TIME(data.PauseTime)
+    setLs.PAUSE_MUSIC(data.PauseMusic)
+    setLs.PAUSE_MUSIC_VOLUME(data.PauseMusicVolume)
   }
   reader.readAsText(file)
 }
