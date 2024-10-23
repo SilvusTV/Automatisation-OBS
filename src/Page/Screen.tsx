@@ -45,7 +45,7 @@ export default function Screen() {
             <p className={"totalTimeGoal"}>{getLs.WORKING_TIME_GOAL()}H</p>
           </div>
             <div className={"countdown"}>
-                <p className={"white"}>{showTime(counter)}</p>
+                <p className={"white"}>{showTime(counter).slice(3)}</p>
                 <style>
                     {`
                     .countdown-bar > video, .countdown-bar:before {
@@ -65,7 +65,7 @@ export default function Screen() {
             <p className="pauseTime">{pauseTime}</p>
           </div>
           <div className={"countdown"}>
-                <p>{showTime(counter)}</p>
+                <p>{showTime(counter).slice(3)}</p>
                 <style>
                     {`
                     .countdown-bar > video, .countdown-bar:before {

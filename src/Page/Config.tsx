@@ -140,7 +140,7 @@ export default function Config() {
                     <button onClick={() => setCounter(counter - toMinutes(2))}><p>-2</p></button>
                     <button onClick={() => setCounter(counter - toMinutes(5))}><p>-5</p></button>
                   </span>
-                  <h3>{showTime(counter)}</h3>
+                  <h3>{showTime(counter).slice(3)}</h3>
                   <span>
                     <button onClick={() => setCounter(counter + toMinutes(1))}><p>+1</p></button>
                     <button onClick={() => setCounter(counter + toMinutes(2))}><p>+2</p></button>
