@@ -49,9 +49,6 @@ export default class setLs{
     static PAUSE_MUSIC_VOLUME(value:number) {
        localStorage.setItem('PAUSE_MUSIC_VOLUME', value.toString())
     }
-    static IS_WORK_SCENE(value:boolean) {
-       localStorage.setItem('IS_WORK_SCENE', value.toString())
-    }
     static WORKING_TIME_GOAL(value:number) {
        localStorage.setItem('WORKING_TIME_GOAL', value.toString())
     }
@@ -63,5 +60,8 @@ export default class setLs{
     }
     static CREDENTIAL(value:ObsCredential) {
         localStorage.setItem('CREDENTIAL', JSON.stringify(value))
+    }
+    static CURRENT_SCENE(value:string) {
+        localStorage.setItem('CURRENT_SCENE', value)
     }
 }

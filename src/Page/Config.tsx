@@ -21,7 +21,6 @@ import {ObsCredential} from "../Types/Credential.ts";
 export default function Config() {
   const [connected, setConnected] = useState<boolean>(false);
   const [obs, setObs] = useState<OBSWebSocket>(new OBSWebSocket());
-  const [workScene, setWorkScene] = useState(true);
   const workingTime = toMinutes(getLs.WORKING_TIME());
   const pauseTime = toMinutes(getLs.PAUSE_TIME());
   const [counter, setCounter] = useState(workingTime);
@@ -35,6 +34,7 @@ export default function Config() {
   const [showMinutes, setShowMinutes] = useState(false);
   const [showLocalStorages, setShowLocalStorages] = useState(false);
   const [updateTotalTime, setUpdateTotalTime] = useState(false);
+  const [currentScene, setCurrentScene] = useState("");
   const [updateHour, setUpdateHour] = useState(showTime(totalTime).split(":")[0]);
   const [updateMin, setUpdateMin] = useState(showTime(totalTime).split(":")[1]);
   const [workingTimeGoal, setWorkingTimeGoal] = useState(getLs.WORKING_TIME_GOAL());
@@ -82,25 +82,21 @@ export default function Config() {
     }
   }, [timeNow]);
   useEffect(() => {
+    getCurrentScene()
     if (counter <= 0) {
-      if (workScene) {
+      if (currentScene === getLs.WORKING_SCENE()) {
         setCounter(pauseTime)
         setCounterEndTime(timeNow + pauseTime * 1000)
-        setWorkScene(false)
-        setLs.IS_WORK_SCENE(false)
         changeScene(getLs.PAUSE_SCENE())
         changeMicrophoneState(getLs.PAUSE_MICROPHONE())
         changeMusicVolume(getLs.PAUSE_MUSIC(), getLs.PAUSE_MUSIC_VOLUME())
       } else {
         setCounter(workingTime)
         setCounterEndTime(timeNow + workingTime * 1000)
-        setWorkScene(true)
-        setLs.IS_WORK_SCENE(true)
         changeScene(getLs.WORKING_SCENE())
         changeMicrophoneState(getLs.WORKING_MICROPHONE())
         changeMusicVolume(getLs.WORKING_MUSIC(), getLs.WORKING_MUSIC_VOLUME())
       }
-
     }
   }, [counter]);
 
@@ -113,6 +109,14 @@ export default function Config() {
 
   function changeScene(scene: string) {
     obs.call("SetCurrentProgramScene", {"sceneName": scene})
+  }
+
+  function getCurrentScene() {
+    obs.call("GetSceneList").then((scene) => {
+      const sceneName = scene.currentProgramSceneName
+      setCurrentScene(sceneName)
+      setLs.CURRENT_SCENE(sceneName)
+    })
   }
 
   function changeMicrophoneState(state: boolean) {

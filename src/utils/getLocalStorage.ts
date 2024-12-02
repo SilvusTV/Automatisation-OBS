@@ -66,10 +66,6 @@ export default class getLs {
     return parseInt(localStorage.getItem('PAUSE_MUSIC_VOLUME') || '0')
   }
 
-  static IS_WORK_SCENE(): boolean {
-    return localStorage.getItem('IS_WORK_SCENE') === 'true'
-  }
-
   static WORKING_TIME_GOAL(): number {
     return parseInt(localStorage.getItem('WORKING_TIME_GOAL') || '0')
   }
@@ -88,5 +84,9 @@ export default class getLs {
     } else {
       return JSON.parse(localStorage.getItem('CREDENTIAL')!) as ObsCredential
     }
+  }
+
+  static CURRENT_SCENE(): string {
+    return localStorage.getItem('CURRENT_SCENE') || ''
   }
 }
