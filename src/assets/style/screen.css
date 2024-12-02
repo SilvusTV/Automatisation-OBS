@@ -54,16 +54,16 @@
     font-family: 'Brodaers Expanded';
 }
 .totalTimeGroup > .separator{
-    font-size: 30pt !important;
+    font-size: 25pt !important;
 }
 .totalTimeGroup > p{
     font-size: 23pt;
 }
 .totalTimeGroup > .totalTimeScreen > p{
-    font-size: 23pt;
+    font-size: 20pt;
 }
 .totalTimeGroup.two-lines > p{
-    font-size: 20pt;
+    font-size: 17pt;
 }
 .totalTimeGroup.two-lines > .totalTimeScreen {
     display: flex;
