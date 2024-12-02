@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import getLs from "../../utils/getLocalStorage.ts";
 import setLs from "../../utils/setLocalStorage.ts";
 import {MicOn} from "../../assets/MicOn.tsx";
@@ -19,6 +19,13 @@ export default function AddConfiguration(props: {
   const [workingMicrophone, setWorkingMicrophone] = useState<boolean>(getLs.WORKING_MICROPHONE());
   const [workingMusic, setWorkingMusic] = useState<boolean>(getLs.WORKING_MUSIC());
   const [workingMusicVolume, setWorkingMusicVolume] = useState<number>(getLs.WORKING_MUSIC_VOLUME());
+  const [dbPause, setDbPause] = useState<number>(0);
+  useEffect(() => {
+    const a = Math.pow(100, 1/100)
+  setDbPause(parseFloat((-100 * Math.pow(a, pauseMusicVolume)+1).toFixed(2)))
+
+  }, [pauseMusicVolume])
+
   return (
     <>
       <div className={"inputs block"}>
@@ -111,8 +118,8 @@ export default function AddConfiguration(props: {
                 </button>
               </span>
               <span className={"volume"}>
-                <label htmlFor="pauseVolume">{pauseMusicVolume}dB</label>
-                <input type="range" min="-100" max="0" value={pauseMusicVolume}
+                <label htmlFor="pauseVolume">{dbPause}dB</label>
+                <input type="range" min="-100" max="0" step={1} value={pauseMusicVolume}
                        className={clsx(!pauseMusic && "disabled")} name={"pauseVolume"} onChange={event => {
                   setPauseMusicVolume(parseInt(event.target.value));
                   setLs.PAUSE_MUSIC_VOLUME(parseInt(event.target.value))

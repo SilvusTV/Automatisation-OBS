@@ -25,7 +25,8 @@ export default function Config() {
   const workingTime = toMinutes(getLs.WORKING_TIME());
   const pauseTime = toMinutes(getLs.PAUSE_TIME());
   const [counter, setCounter] = useState(workingTime);
-  const [refresh, setRefresh] = useState(false);
+  const [counterEndTime, setCounterEndTime] = useState(0);
+  const [timeNow, setTimeNow] = useState(new Date().getTime());
   const [sceneList, setSceneList] = useState<string[]>();
   const [inputList, setInputList] = useState<string[]>();
   const [totalTime, setTotalTime] = useState(getLs.TOTAL_TIME());
@@ -41,44 +42,67 @@ export default function Config() {
   const [port, setPort] = useState(4455);
   const [password, setPassword] = useState("")
 
-  setInterval(function () {
-    if (getLs.REFRESH()) {
-      setRefresh(true);
-      setLs.REFRESH(false);
-    }
-  }, 250);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeNow(Date.now());
+    }, 50); // Mise à jour toutes les millisecondes
+
+    return () => clearInterval(interval); // Nettoyage de l'intervalle à la désactivation du composant
+  }, []);
+
+
+  function onPause() {
+    setCounterEndTime(timeNow + (counter * 1000))
+    setCounter(Math.round(((timeNow + (counter * 1000)) - timeNow) / 1000))
+    setTimePaused(!timePaused)
+
+  }
+
+  function addTime(timeToAdd: number) {
+    setCounterEndTime(counterEndTime + toMinutes(timeToAdd) * 1000)
+    setCounter(counter + toMinutes(timeToAdd))
+  }
+
+  function removeTime(timeToAdd: number) {
+    setCounterEndTime(counterEndTime - toMinutes(timeToAdd) * 1000)
+    setCounter(counter - toMinutes(timeToAdd))
+  }
 
   useEffect(() => {
-    setRefresh(false)
     if (connected) {
       if (!timePaused) {
-        setTotalTime(totalTime + 1)
         setLs.TOTAL_TIME(totalTime + 1)
         setLs.COUNTER(counter)
-        const timer = setInterval(() => setCounter(counter - 1), 1000);
-        return () => {
-          clearInterval(timer as number)
-          if (counter <= 0) {
-            if (workScene) {
-              setCounter(pauseTime)
-              setWorkScene(false)
-              setLs.IS_WORK_SCENE(false)
-              changeScene(getLs.PAUSE_SCENE())
-              changeMicrophoneState(getLs.PAUSE_MICROPHONE())
-              changeMusicVolume(getLs.PAUSE_MUSIC(), getLs.PAUSE_MUSIC_VOLUME())
-            } else {
-              setCounter(workingTime)
-              setWorkScene(true)
-              setLs.IS_WORK_SCENE(true)
-              changeScene(getLs.WORKING_SCENE())
-              changeMicrophoneState(getLs.WORKING_MICROPHONE())
-              changeMusicVolume(getLs.WORKING_MUSIC(), getLs.WORKING_MUSIC_VOLUME())
-            }
-          }
-        };
+        const newCounter = Math.round((counterEndTime - timeNow) / 1000)
+        if (newCounter !== counter) {
+          setTotalTime(prevTotalTime => prevTotalTime + 1)
+        }
+        setCounter(newCounter)
       }
     }
-  }, [counter, connected, refresh, timePaused]);
+  }, [timeNow]);
+  useEffect(() => {
+    if (counter <= 0) {
+      if (workScene) {
+        setCounter(pauseTime)
+        setCounterEndTime(timeNow + pauseTime * 1000)
+        setWorkScene(false)
+        setLs.IS_WORK_SCENE(false)
+        changeScene(getLs.PAUSE_SCENE())
+        changeMicrophoneState(getLs.PAUSE_MICROPHONE())
+        changeMusicVolume(getLs.PAUSE_MUSIC(), getLs.PAUSE_MUSIC_VOLUME())
+      } else {
+        setCounter(workingTime)
+        setCounterEndTime(timeNow + workingTime * 1000)
+        setWorkScene(true)
+        setLs.IS_WORK_SCENE(true)
+        changeScene(getLs.WORKING_SCENE())
+        changeMicrophoneState(getLs.WORKING_MICROPHONE())
+        changeMusicVolume(getLs.WORKING_MUSIC(), getLs.WORKING_MUSIC_VOLUME())
+      }
+
+    }
+  }, [counter]);
 
   async function connect(credentials: ObsCredential) {
     setObs(await getObs(credentials))
@@ -136,20 +160,18 @@ export default function Config() {
               <div className={"child-block"}>
                 <span>
                   <span>
-                    <button onClick={() => setCounter(counter - toMinutes(1))}><p>-1</p></button>
-                    <button onClick={() => setCounter(counter - toMinutes(2))}><p>-2</p></button>
-                    <button onClick={() => setCounter(counter - toMinutes(5))}><p>-5</p></button>
+                    <button onClick={() => removeTime(1)}><p>-1</p></button>
+                    <button onClick={() => removeTime(2)}><p>-2</p></button>
+                    <button onClick={() => removeTime(5)}><p>-5</p></button>
                   </span>
                   <h3>{showTime(counter).slice(3)}</h3>
                   <span>
-                    <button onClick={() => setCounter(counter + toMinutes(1))}><p>+1</p></button>
-                    <button onClick={() => setCounter(counter + toMinutes(2))}><p>+2</p></button>
-                    <button onClick={() => setCounter(counter + toMinutes(5))}><p>+5</p></button>
+                    <button onClick={() => addTime(1)}><p>+1</p></button>
+                    <button onClick={() => addTime(2)}><p>+2</p></button>
+                    <button onClick={() => addTime(5)}><p>+5</p></button>
                   </span>
               </span>
-                <button onClick={() => {
-                  setTimePaused(!timePaused)
-                }}>
+                <button onClick={() => onPause()}>
                   {timePaused ? <Play className={"icon"}/> : <Pause className={"icon"}/>}
                 </button>
 
