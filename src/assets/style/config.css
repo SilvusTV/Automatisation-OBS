@@ -194,7 +194,12 @@ section.configPage > .countDown > .child-block > span {
     justify-content: space-between;
 
 }
-
+section.configPage > .countDown > .child-block > .action-on-timer {
+    gap : 5px;
+}
+section.configPage > .countDown > .child-block > .action-on-timer > button {
+    width: 100%;
+}
 section.configPage > .totalTime > .child-block {
     display: flex;
     gap: 5px;

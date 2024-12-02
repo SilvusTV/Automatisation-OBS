@@ -49,7 +49,18 @@ export default function Config() {
 
     return () => clearInterval(interval); // Nettoyage de l'intervalle à la désactivation du composant
   }, []);
-
+  function skip() {
+    setCounter(0)
+  }
+  function reset() {
+    if (currentScene === getLs.WORKING_SCENE()) {
+      setCounter(workingTime)
+      setCounterEndTime(timeNow + workingTime * 1000)
+    } else {
+      setCounter(pauseTime)
+      setCounterEndTime(timeNow + pauseTime * 1000)
+    }
+  }
 
   function onPause() {
     setCounterEndTime(timeNow + (counter * 1000))
@@ -174,11 +185,18 @@ export default function Config() {
                     <button onClick={() => addTime(2)}><p>+2</p></button>
                     <button onClick={() => addTime(5)}><p>+5</p></button>
                   </span>
-              </span>
+                </span>
                 <button onClick={() => onPause()}>
                   {timePaused ? <Play className={"icon"}/> : <Pause className={"icon"}/>}
                 </button>
-
+                <span className={"action-on-timer"}>
+                  <button onClick={() => reset()}>
+                  reset
+                </button>
+                <button onClick={() => skip()}>
+                  skip
+                </button>
+                </span>
               </div>
             </div>
             <div className={"totalTime block"}>
