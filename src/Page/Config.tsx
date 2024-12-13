@@ -1,5 +1,5 @@
 import OBSWebSocket from "obs-websocket-js";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {getInputList, getObs, getSceneList} from "../utils/obs.ts";
 import setLs from "../utils/setLocalStorage.ts";
 import AddConfiguration from "./Config/addConfiguration.tsx";
@@ -45,7 +45,7 @@ export default function Config() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeNow(Date.now());
-    }, 50); // Mise à jour toutes les millisecondes
+    }, 250); // Mise à jour toutes les 250 millisecondes
 
     return () => clearInterval(interval); // Nettoyage de l'intervalle à la désactivation du composant
   }, []);
@@ -92,7 +92,7 @@ export default function Config() {
       }
     }
   }, [timeNow]);
-  useEffect(() => {
+  useMemo(() => {
     getCurrentScene()
     if (counter <= 0) {
       audio.play()
