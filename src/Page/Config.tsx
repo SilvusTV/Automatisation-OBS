@@ -41,7 +41,7 @@ export default function Config() {
   const [host, setHost] = useState("localhost");
   const [port, setPort] = useState(4455);
   const [password, setPassword] = useState("")
-  const audio = new Audio("../../public/hotel-bell-ding-1-174457.mp3");
+  const audio = new Audio("/hotel-bell-ding-1-174457.mp3");
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeNow(Date.now());

@@ -31,7 +31,6 @@ export function loadData(e: ChangeEvent<HTMLInputElement>){
     setLs.WORKING_TIME_GOAL(data.WorkingTimeGoal)
     setLs.SHOW_WORKING_TIME_MINUTES(data.ShowWorkingTimeMinutes)
     setLs.SHOW_WORKING_TIME_SECONDS(data.ShowWorkingTimeSeconds)
-    setLs.IS_WORK_SCENE(data.IsWorkScene)
     setLs.WORKING_MICROPHONE(data.WorkingMicrophone)
     setLs.WORKING_SCENE(data.WorkingScene)
     setLs.WORKING_TIME(data.WorkingTime)
@@ -54,7 +53,6 @@ export function getData(){
     WorkingTimeGoal: getLs.WORKING_TIME_GOAL(),
     ShowWorkingTimeMinutes: getLs.SHOW_WORKING_TIME_MINUTES(),
     ShowWorkingTimeSeconds: getLs.SHOW_WORKING_TIME_SECONDS(),
-    IsWorkScene: getLs.IS_WORK_SCENE(),
     WorkingMicrophone: getLs.WORKING_MICROPHONE(),
     WorkingScene: getLs.WORKING_SCENE(),
     WorkingTime: getLs.WORKING_TIME(),
